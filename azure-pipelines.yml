@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  vmImage: 'devops_agent'
+  name: 'devops_agent'
 
 steps:
 - task: Maven@3
