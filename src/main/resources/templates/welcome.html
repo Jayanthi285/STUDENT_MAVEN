@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Course Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+            padding: 30px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: #343a40;
+        }
+
+        .add-new {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .add-new a {
+            font-weight: bold;
+            color: #28a745;
+            background-color: #e9f9ee;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+
+        .add-new a:hover {
+            background-color: #28a745;
+            color: white;
+        }
+
+        table {
+            text-align: center;
+        }
+
+        .table thead {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .table tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+
+        .btn-edit {
+            background-color: #17a2b8;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+
+        .btn-edit:hover {
+            background-color: #138496;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+
+        .btn-delete:hover {
+            background-color: #bd2130;
+        }
+
+        .logout-btn {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logout-btn button {
+            background-color: #6c757d;
+            color: white;
+            border-radius: 8px;
+            padding: 10px 20px;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .logout-btn button:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>🎓 Student Course Registration</h2>
+
+        <div class="add-new">
+            <a th:href="@{'/new'}">➕ Add New Student</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Student Name</th>
+                        <th>Course</th>
+                        <th>Fee</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="student, iterStat : ${liststudent}">
+                        <td th:text="${iterStat.index + 1}">1</td>
+                        <td th:text="${student.studentname}">John Doe</td>
+                        <td th:text="${student.course}">Java</td>
+                        <td th:text="${student.fee}">5000</td>
+                        <td><a th:href="@{'/edit/' + ${student.id}}" class="btn btn-edit">Edit</a></td>
+                        <td><a th:href="@{'/delete/' + ${student.id}}" class="btn btn-delete">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="logout-btn">
+            <form th:action="@{/logout}" method="get">
+                <button type="submit">🚪 Logout</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
